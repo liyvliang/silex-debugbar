@@ -14,7 +14,7 @@
     "description": "php-debugbar provider for silex.",
     "require": {
         "silex/silex": "dev-poper",
-        "maximebf/debugbar": "1.*"
+        "maximebf/debugbar": "^1.10|^3.2"
     },
     "suggest": {
         "doctrine/dbal": "2.2.*"
