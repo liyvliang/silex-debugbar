@@ -10,7 +10,7 @@ namespace Dongww\Silex\Provider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use DebugBar\StandardDebugBar;
 use DebugBar\Bridge\DoctrineCollector;
 use Doctrine\DBAL\Logging\DebugStack;
@@ -48,14 +48,14 @@ class DebugBarServiceProvider implements ServiceProviderInterface
     /**
      * 输出debugBar，只有当页面有</body>标签时有效。
      *
-     * @param FilterResponseEvent $event
+     * @param ResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         $response = $event->getResponse();
         $request  = $event->getRequest();
 
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
         if ($request->isXmlHttpRequest()) {
